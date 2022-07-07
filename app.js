@@ -1,7 +1,10 @@
 
 
-const city = document.querySelector('.loc');
+const timeZone = document.querySelector('.timezone');
 const icon = document.querySelector('.icon');
+const degree = document.querySelector('.degree');
+const tempDesc = document.querySelector('.temp-desc');
+const unit=  document.querySelector('.unit');
 
 
 const getLoc =async ()=>
@@ -9,16 +12,12 @@ const getLoc =async ()=>
     const urlIP="http://ip-api.com/json/?fields=country,city,lat,lon,timezone";
     const response  = await fetch(urlIP);
     const data = await response.json();
-    const lat = data.lat;
-    const lan = data.lon;
-    city.textContent = `${data.timezone}`;
+    timeZone.textContent = `${data.timezone}`;
     return data;
     
 }
 
-getLoc()
-
-const getWeather=async ()=>
+const getWeather=async (lat,lon)=>
 {
 const urlWeather=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9bd1e4553c53b771c19ecb669bdaf92b`;   
 
@@ -29,5 +28,63 @@ const urlWeather=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon
 
 function getDayOrNight()
 {
-   
+    let dayOrNight;
+   let d =new Date();
+   if (d.getHours() >= 6 && d.getHours() <=19) {
+    dayOrNight = "Day"
+   }
+   else
+   {
+    dayOrNight="Night"
+   }
 }
+
+function getIcon(weMain)
+{
+    let icon;
+    switch (weMain) {
+        case 'Clouds':
+            icon = `${weMain}.svg`;
+            break;
+        case 'Drizzle':
+            icon = `${weMain}.svg`;
+            break;
+        case 'Rain':
+            icon = `${weMain}.svg`;
+            break;
+        case 'Snow':
+            icon = `${weMain}.svg`;
+            break;
+        case 'Clear':
+            const dayOrNight = getDayOrNight();
+            icon = `${weMain}.svg`;
+            break;
+        case 'Thunderstorm':
+            icon = `${weMain}.svg`;
+            break;
+    
+    }
+    return icon;
+}
+
+function getTemp(weTemp)
+{
+    const k = weTemp;
+    const f = (k - 273.15) * 9/5 +32; 
+    const c = k - 273.15;
+    return temp ={kel:Math.floor(k) , far:Math.floor(f),can:Math.floor(c)};
+}
+
+getLoc().then(locData=>
+    {
+       
+        return getWeather(locData.lat,locData.lon);
+    }).then(weData=>
+        {
+            console.log(weData);
+            degree.textContent = Math.floor(weData.main.temp);
+            tempDesc.textContent= weData.weather[0].description;
+            unit.textContent="k"
+            const gotIcon= getIcon( weData.weather[0].main)
+            icon.innerHTML=`<img src="./image/${gotIcon}" >`
+        })

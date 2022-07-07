@@ -9,7 +9,7 @@
 
 body
 {
-  background-image: linear-gradient(to right, rgb(97, 59, 235), rgb(122, 150, 193));
+  background-image: linear-gradient(to right, rgb(97, 59, 235), rgb(187, 206, 234));
 }
 
 .container{
@@ -20,17 +20,27 @@ body
     margin-top: 6rem;
 }
 
+.title{
+    font-size: 25px;
+}
+
 .city{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 7rem;
+    margin: 3rem;
 }
 
-.degree{
+.temp{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
    
+}
+.degree{
+    padding: 0 0.5rem;
+}
+img{
+    width: 10rem;
 }
