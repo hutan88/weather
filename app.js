@@ -4,6 +4,7 @@ const timeZone = document.querySelector('.timezone');
 const icon = document.querySelector('.icon');
 const degree = document.querySelector('.degree');
 const tempDesc = document.querySelector('.temp-desc');
+const degreeSec = document.querySelector('.degree-section');
 const unit=  document.querySelector('.unit');
 
 
@@ -77,14 +78,37 @@ function getTemp(weTemp)
 
 getLoc().then(locData=>
     {
-       
         return getWeather(locData.lat,locData.lon);
     }).then(weData=>
         {
             console.log(weData);
-            degree.textContent = Math.floor(weData.main.temp);
+            const weTemp=  Math.floor(weData.main.temp);
+            degree.textContent =weTemp;
             tempDesc.textContent= weData.weather[0].description;
-            unit.textContent="k"
-            const gotIcon= getIcon( weData.weather[0].main)
-            icon.innerHTML=`<img src="./image/${gotIcon}" >`
-        })
+            unit.textContent="K";
+            const gotIcon= getIcon( weData.weather[0].main);
+            icon.innerHTML=`<img src="./image/${gotIcon}" >`;
+            degreeSec.addEventListener('click',e=>
+            {
+                e.preventDefault;
+               switch (unit.textContent) {
+                case 'K':
+                    degree.textContent = getTemp(weTemp).far
+                    unit.textContent = "F"
+                    break;
+                case 'F':
+                    degree.textContent = getTemp(weTemp).can
+                    unit.textContent = "C"
+                    break;
+                case 'C':
+                    degree.textContent = getTemp(weTemp).kel
+                    unit.textContent = "K"
+                    break;
+               
+         
+               }
+            })
+        });
+
+
+     

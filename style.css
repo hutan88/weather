@@ -38,9 +38,16 @@ body
     flex-direction: column;
    
 }
+
+.degree-section:hover{
+    cursor: pointer;
+}
+
 .degree{
     padding: 0 0.5rem;
 }
+
+
 img{
     width: 10rem;
 }
