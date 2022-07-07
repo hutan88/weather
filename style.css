@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic ;
+    color: rgb(255, 255, 255);
+}
+
+body
+{
+  background-image: linear-gradient(to right, rgb(97, 59, 235), rgb(122, 150, 193));
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 6rem;
+}
+
+.city{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 7rem;
+}
+
+.degree{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+}
